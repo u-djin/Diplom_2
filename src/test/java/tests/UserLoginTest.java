@@ -1,3 +1,5 @@
+package tests;
+
 import api.Steps;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
@@ -41,7 +43,7 @@ public class UserLoginTest {
     @DisplayName("Некорректный логин")
     @Description("Ожидается статус 401 и соответствующее сообщение")
     public void incorrectLoginTest() {
-        /// так как поля имеют одинаковый функционал, тесты объеденены в один последовательный
+        // так как поля имеют одинаковый функционал, тесты объеденены в один последовательный
         // с большой вероятностью ошибка в одном из полей проявится и в двух других
         // поэтому не обязательно проверять все поля по отдельности
         Response response = Steps.userLogin("", password);

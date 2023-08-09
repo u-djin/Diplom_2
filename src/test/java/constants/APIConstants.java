@@ -8,6 +8,8 @@ public class APIConstants {
     public final static String USER_EDIT = "/api/auth/user";
     public final static String USER_DELETE = "/api/auth/user";
 
+    public final static String INGREDIENTS_GET = "/api/ingredients";
+
     public final static String ORDER_CREATE = "/api/orders";
-    public final static String ORDER_GET = "/api/orders";
+    public final static String ORDERS_GET = "/api/orders";
 }

@@ -1,3 +1,5 @@
+package tests;
+
 import api.Steps;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
@@ -10,7 +12,7 @@ import org.junit.Test;
 import static org.apache.http.HttpStatus.*;
 import static org.hamcrest.Matchers.equalTo;
 
-public class UserEdit {
+public class UserEditTest {
     private String randomEmail = String.format("%s@yandex.ru", RandomStringUtils.random(15, true, true));
     private String name = "Anonymous";
     private String password = "password";
@@ -61,38 +63,27 @@ public class UserEdit {
     }
 
     @Test
-    @DisplayName("Редактирование имени пользователя без авторизации")
+    @DisplayName("Редактирование пользователя без авторизации")
     @Description("Ожидается статус 401")
-    public void editNameWithoutAuthorizationTest() {
+    public void editUserWithoutAuthorizationTest() {
         String newName = String.format("%s_%s", name, RandomStringUtils.random(5, true, true));
         response = Steps.userEditName("", newName);
         response.then().statusCode(SC_UNAUTHORIZED);
         response.then().assertThat().body("success", equalTo(false));
         response.then().assertThat().body("message", equalTo("You should be authorised"));
-    }
 
-    @Test
-    @DisplayName("Редактирование почты пользователя без авторизации")
-    @Description("Ожидается статус 401")
-    public void editEmailWithoutAuthorizationTest() {
         String newEmail = String.format("%s@yandex.ru", RandomStringUtils.random(20, true, true));
         response = Steps.userEditEmail("", newEmail);
         response.then().statusCode(SC_UNAUTHORIZED);
         response.then().assertThat().body("success", equalTo(false));
         response.then().assertThat().body("message", equalTo("You should be authorised"));
-    }
 
-    @Test
-    @DisplayName("Редактирование пароля пользователя без авторизации")
-    @Description("Ожидается статус 401")
-    public void editPasswordWithoutAuthorizationTest() {
         String newPassword = String.format("%s_%s", password, RandomStringUtils.random(5, true, true));
         response = Steps.userEditPassword("", newPassword);
         response.then().statusCode(SC_UNAUTHORIZED);
         response.then().assertThat().body("success", equalTo(false));
         response.then().assertThat().body("message", equalTo("You should be authorised"));
     }
-
 
     @After
     public void deleteAfter() {
